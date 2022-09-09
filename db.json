@@ -1,16 +1,6 @@
 {
   "pokemons": [
     {
-      "id": 1,
-      "name": "Pikachu",
-      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Pok%C3%A9mon_Pikachu_art.png/220px-Pok%C3%A9mon_Pikachu_art.png"
-    },
-    {
-      "id": 2,
-      "name": "Charmander",
-      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Pok%C3%A9mon_Charmander_art.png/220px-Pok%C3%A9mon_Charmander_art.png"
-    },
-    {
       "id": 3,
       "name": "Squirtle",
       "image": "https://upload.wikimedia.org/wikipedia/en/5/59/Pok%C3%A9mon_Squirtle_art.png"
@@ -26,9 +16,9 @@
       "id": 6
     },
     {
-      "name": "Ed",
-      "image": "sdfds",
-      "id": 7
+      "name": "blue pokemon",
+      "image": "https://th.bing.com/th/id/R.4ebaa58f6ce3c8de123e5be8a3c3f045?rik=8yI%2fHquP5NrOgA&riu=http%3a%2f%2fanimextremist.com%2fimagenes%2fpokemon%2fpokemon10.jpg&ehk=eU0mb%2fxrkATgJ3GqZDyc8MpB4fiSOg3%2b4VsI%2bVLW7C4%3d&risl=&pid=ImgRaw&r=0",
+      "id": 8
     }
   ]
 }
