@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: aliceblue;
 }
 
 .title {
@@ -8,6 +9,7 @@ body {
 
 .poke-form {
   font-family: monospace;
+  padding: 1rem;
 }
 
 .poke-form label {
@@ -15,7 +17,7 @@ body {
   margin-bottom: 10px;
 }
 
-.poke-form input[type="submit"] {
+.poke-form input[type="submit"], .deleteButton, .editButton {
   padding: 10px 20px;
   background-color: #ffffff;
 
@@ -25,8 +27,16 @@ body {
   font-family: monospace;
 }
 
-.poke-form input[type="submit"]:hover {
+.poke-form input[type="submit"]:hover, .editButton:hover {
   background-color: aliceblue;
+}
+
+.deleteButton {
+  background-color: lightcoral;
+}
+
+.deleteButton:hover {
+  background-color: lightpink;
 }
 
 .poke-list {
@@ -44,6 +54,8 @@ body {
   padding: 20px;
 
   box-shadow: 2px 2px 5px 0 #00000030;
+
+  text-align: center;
 }
 
 .pokemon img {
@@ -53,4 +65,21 @@ body {
 
 .pokemon h2 {
   text-align: center;
+}
+
+.container {
+  padding: 2rem;
+  width: 42rem;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 1rem;
+}
+
+.demoImages {
+  background-color: lightgray;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
 }

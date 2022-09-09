@@ -5,14 +5,27 @@ function addPokemon(pokemon) {
   const liEl = document.createElement("li")
   const imgEl = document.createElement("img")
   const h2El = document.createElement("h2")
+  const deleteButton = document.createElement("button")
+  const editButton = document.createElement("button")
 
   liEl.classList.add("pokemon")
   imgEl.src = pokemon.image
 
   h2El.innerText = pokemon.name
 
-  liEl.append(imgEl, h2El)
+  deleteButton.innerText = 'Delete'
+  deleteButton.setAttribute('id', 'delete' + pokemon.id)
+  deleteButton.setAttribute('class', 'deleteButton')
+
+  editButton.innerText = 'Edit'
+  editButton.setAttribute('id', 'edit' + pokemon.id)
+  editButton.setAttribute('class', 'editButton')
+
+  liEl.append(imgEl, h2El, editButton, deleteButton)
   pokeList.append(liEl)
+
+  deleteButton.addEventListener('click', function(e) {  console.log('delete button clicked', pokemon.id) });
+  editButton.addEventListener('click', function(e) {  console.log('edit button clicked', pokemon.id) });
 }
 
 function addPokemons(pokemons) {
