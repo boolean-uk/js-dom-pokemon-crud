@@ -24,8 +24,12 @@ function addPokemon(pokemon) {
   liEl.append(imgEl, h2El, editButton, deleteButton)
   pokeList.append(liEl)
 
-  deleteButton.addEventListener('click', function(e) {  console.log('delete button clicked', pokemon.id) });
-  editButton.addEventListener('click', function(e) {  console.log('edit button clicked', pokemon.id) });
+  deleteButton.addEventListener('click', function (e) {
+    deletePokemon(pokemon.id)
+  });
+  editButton.addEventListener('click', function (e) {
+    editPokemon(pokemon.id)
+  });
 }
 
 function addPokemons(pokemons) {
@@ -60,6 +64,19 @@ function postNewPokemon(newPokemon) {
   })
     .then(res => res.json())
     .then(pokemon => addPokemon(pokemon))
+}
+
+function deletePokemon(pokemonId) {
+  fetch("http://localhost:3000/pokemons/" + pokemonId, {
+    method: "DELETE"
+  })
+}
+
+function editPokemon(pokemonId) {
+  // 1. Get the pokemon with this ID.
+  // 2. Populate the form with this data.
+  // 3. Place focus on form.
+  console.log('Edit Pokemon', pokemonId)
 }
 
 function init() {
