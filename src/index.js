@@ -26,7 +26,7 @@ function listenToAddPokemonForm() {
       name: pokeForm.name.value,
       image: pokeForm.image.value
     }
-    postNewPokemon(newPokemon)
+    postNewPokemon(pokemon)
     pokeForm.reset()
   })
 }
@@ -43,7 +43,7 @@ function postNewPokemon(newPokemon) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(pokemon)
+    body: JSON.stringify(newPokemon)
   })
     .then(res => res.json())
     .then(pokemon => addPokemon(pokemon))

@@ -25,6 +25,10 @@ body {
   font-family: monospace;
 }
 
+.poke-form input[type="submit"]:hover {
+  background-color: aliceblue;
+}
+
 .poke-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
