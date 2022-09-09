@@ -17,7 +17,7 @@ body {
   margin-bottom: 10px;
 }
 
-.poke-form input[type="submit"], .deleteButton, .editButton {
+.poke-form input[type="submit"], .deleteButton, .likeButton {
   padding: 10px 20px;
   background-color: #ffffff;
 
@@ -27,7 +27,7 @@ body {
   font-family: monospace;
 }
 
-.poke-form input[type="submit"]:hover, .editButton:hover {
+.poke-form input[type="submit"]:hover, .likeButton:hover {
   background-color: aliceblue;
 }
 
@@ -82,4 +82,14 @@ body {
   margin-top: 1rem;
   border: 1px solid gray;
   border-radius: 1rem;
+}
+
+#editWarning {
+  color: red;
+}
+
+.editMode {
+  background-color: lightpink;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }

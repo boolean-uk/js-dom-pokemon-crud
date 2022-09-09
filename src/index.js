@@ -1,12 +1,13 @@
 const pokeForm = document.querySelector(".poke-form")
 const pokeList = document.querySelector(".poke-list")
+const likedPokemons = []
 
 function addPokemon(pokemon) {
   const liEl = document.createElement("li")
   const imgEl = document.createElement("img")
   const h2El = document.createElement("h2")
   const deleteButton = document.createElement("button")
-  const editButton = document.createElement("button")
+  const likeButton = document.createElement("button")
 
   liEl.classList.add("pokemon")
   imgEl.src = pokemon.image
@@ -17,18 +18,20 @@ function addPokemon(pokemon) {
   deleteButton.setAttribute('id', 'delete' + pokemon.id)
   deleteButton.setAttribute('class', 'deleteButton')
 
-  editButton.innerText = 'Edit'
-  editButton.setAttribute('id', 'edit' + pokemon.id)
-  editButton.setAttribute('class', 'editButton')
 
-  liEl.append(imgEl, h2El, editButton, deleteButton)
+
+  likeButton.innerText = 'Like'
+  likeButton.setAttribute('id', 'like' + pokemon.id)
+  likeButton.setAttribute('class', 'likeButton')
+
+  liEl.append(imgEl, h2El, likeButton, deleteButton)
   pokeList.append(liEl)
 
   deleteButton.addEventListener('click', function (e) {
     deletePokemon(pokemon.id)
   });
-  editButton.addEventListener('click', function (e) {
-    editPokemon(pokemon.id)
+  likeButton.addEventListener('click', function (e) {
+    likePokemon(pokemon.id)
   });
 }
 
@@ -72,11 +75,18 @@ function deletePokemon(pokemonId) {
   })
 }
 
-function editPokemon(pokemonId) {
-  // 1. Get the pokemon with this ID.
-  // 2. Populate the form with this data.
-  // 3. Place focus on form.
-  console.log('Edit Pokemon', pokemonId)
+function likePokemon(pokemonId) {
+  if(!findLikedPokemons(pokemonId)) {
+    likedPokemons.push(pokemonId)
+  }
+  console.log(likedPokemons)
+}
+
+function findLikedPokemons(pokemonId) {
+  if(likedPokemons.find(element => element === pokemonId)) {
+    return true
+  }
+  return false
 }
 
 function init() {

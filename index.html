@@ -12,29 +12,32 @@
   <main class="container">
     <h1 class="title">PokeCRUD</h1>
     <form class="poke-form">
+      <p id="editWarning"></p>
       <label>
         Name:
-        <input type="text" name="name" required />
+        <input type="text" name="name" required id="pokemonNameField"/>
       </label>
       <label>
         Image URL:
-        <input type="text" name="image" required />
+        <input type="text" name="image" required id="imageURLField"/>
       </label>
       <input type="submit" value="Add Pokémon" />
-      <div class="demoImages">
-        <h3>Demo Image URLs to for you to use:</h3>
-        <p>https://scarletviolet.pokemon.com/_images/pokemon/sprigatito/pokemon-sprigatito.webp</p>
-        <p>https://scarletviolet.pokemon.com/_images/pokemon/quaxly/pokemon-quaxly.webp</p>
-        <p>https://scarletviolet.pokemon.com/_images/pokemon/armarouge/pokemon-armarouge.webp</p>
-        <p>https://scarletviolet.pokemon.com/_images/pokemon/armarouge/pokemon-armarouge.webp</p>
-        <p>https://scarletviolet.pokemon.com/_images/pokemon/cyclizar/pokemon-cyclizar.webp</p>
-        <p>https://scarletviolet.pokemon.com/_images/pokemon/fidough/pokemon-fidough.webp</p>
-        <p>https://scarletviolet.pokemon.com/_images/pokemon/lechonk/pokemon-lechonk.webp</p>
-        <p>https://scarletviolet.pokemon.com/en-us/pokemon/pawmi/</p>
-      </div>
+
     </form>
     <ul class="poke-list"></ul>
+    <div class="demoImages">
+      <h3>Demo image URLs to for you to use:</h3>
+      <p>https://scarletviolet.pokemon.com/_images/pokemon/sprigatito/pokemon-sprigatito.webp</p>
+      <p>https://scarletviolet.pokemon.com/_images/pokemon/quaxly/pokemon-quaxly.webp</p>
+      <p>https://scarletviolet.pokemon.com/_images/pokemon/armarouge/pokemon-armarouge.webp</p>
+      <p>https://scarletviolet.pokemon.com/_images/pokemon/armarouge/pokemon-armarouge.webp</p>
+      <p>https://scarletviolet.pokemon.com/_images/pokemon/cyclizar/pokemon-cyclizar.webp</p>
+      <p>https://scarletviolet.pokemon.com/_images/pokemon/fidough/pokemon-fidough.webp</p>
+      <p>https://scarletviolet.pokemon.com/_images/pokemon/lechonk/pokemon-lechonk.webp</p>
+      <p>https://scarletviolet.pokemon.com/en-us/pokemon/pawmi/</p>
+    </div>
   </main>
+
 </body>
 
 </html>
