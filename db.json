@@ -6,29 +6,44 @@
       "image": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Pok%C3%A9mon_Pikachu_art.png/220px-Pok%C3%A9mon_Pikachu_art.png"
     },
     {
-      "id": 2,
-      "name": "Charmander",
-      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/Pok%C3%A9mon_Charmander_art.png/220px-Pok%C3%A9mon_Charmander_art.png"
-    },
-    {
       "id": 3,
       "name": "Squirtle",
       "image": "https://upload.wikimedia.org/wikipedia/en/5/59/Pok%C3%A9mon_Squirtle_art.png"
     },
     {
-      "id": 4,
-      "name": "Bulbasaur",
-      "image": "https://upload.wikimedia.org/wikipedia/en/2/28/Pok%C3%A9mon_Bulbasaur_art.png"
-    },
-    {
-      "name": "Fuecoco",
-      "image": "https://scarletviolet.pokemon.com/_images/pokemon/fuecoco/pokemon-fuecoco.webp",
-      "id": 6
-    },
-    {
       "name": "Scarlet",
       "image": "https://scarletviolet.pokemon.com/_images/pokemon/pawmi/pokemon-pawmi.webp",
       "id": 7
+    },
+    {
+      "name": "Sprigatito",
+      "image": "https://scarletviolet.pokemon.com/_images/pokemon/sprigatito/pokemon-sprigatito.webp",
+      "id": 8
+    },
+    {
+      "name": "Quaxly",
+      "image": "https://scarletviolet.pokemon.com/_images/pokemon/quaxly/pokemon-quaxly.webp",
+      "id": 9
+    },
+    {
+      "name": "Armarouge",
+      "image": "https://scarletviolet.pokemon.com/_images/pokemon/armarouge/pokemon-armarouge.webp",
+      "id": 10
+    },
+    {
+      "name": "Cyclizar",
+      "image": "https://scarletviolet.pokemon.com/_images/pokemon/cyclizar/pokemon-cyclizar.webp",
+      "id": 11
+    },
+    {
+      "name": "Fidough",
+      "image": "https://scarletviolet.pokemon.com/_images/pokemon/fidough/pokemon-fidough.webp",
+      "id": 12
+    },
+    {
+      "name": "Lechonk",
+      "image": "https://scarletviolet.pokemon.com/_images/pokemon/lechonk/pokemon-lechonk.webp",
+      "id": 13
     }
   ]
 }

@@ -76,14 +76,6 @@ body {
   border-radius: 1rem;
 }
 
-.demoImages {
-  background-color: lightgray;
-  padding: 0.5rem;
-  margin-top: 1rem;
-  border: 1px solid gray;
-  border-radius: 1rem;
-}
-
 #editWarning {
   color: red;
 }
@@ -93,3 +85,16 @@ body {
   padding: 1rem;
   border-radius: 0.5rem;
 }
+
+img.liked, img.notLiked{
+  width: 20px;
+}
+
+.notLiked {
+  display: none;
+}
+
+.liked {
+  display: block;
+}
+
