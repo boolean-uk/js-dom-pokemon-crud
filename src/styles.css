@@ -6,6 +6,19 @@ body {
   text-align: center;
 }
 
+.pokemon-like {
+  max-width: 50px;
+  padding: 2px;
+}
+
+.pokemon-like-clicked {
+  scale: 1.1;
+}
+
+.pokemon-like:hover {
+  cursor: pointer;
+}
+
 .poke-form {
   font-family: monospace;
 }

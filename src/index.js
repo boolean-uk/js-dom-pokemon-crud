@@ -5,13 +5,29 @@ function addPokemon(pokemon) {
   const liEl = document.createElement("li");
   const imgEl = document.createElement("img");
   const h2El = document.createElement("h2");
+  const delButton = document.createElement("button");
+  const likeButton = document.createElement("img");
 
   liEl.classList.add("pokemon");
   imgEl.src = pokemon.image;
+  likeButton.src = "img/like.png";
+  likeButton.classList.add("pokemon-like");
 
   h2El.innerText = pokemon.name;
+  delButton.innerHTML = 'Delete Pokemon'
+  delButton.addEventListener('click', () => {
+    console.log('Delete Pokemon');
+    fetch(`http://localhost:3000/pokemons/${pokemon.id}`, {
+    method: 'DELETE'
+  })
+  })
+  likeButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    console.log('Like Pokemon');
+    likeButton.src = "img/like-true.png";
+  })
 
-  liEl.append(imgEl, h2El);
+  liEl.append(imgEl, h2El, delButton, likeButton);
   pokeList.append(liEl);
 }
 
@@ -26,30 +42,25 @@ function listenToAddPokemonForm() {
       name: pokeForm.name.value,
       image: pokeForm.image.value
     };
-
-    // CREATE
-    // fetch("http://localhost:3000/pokemons", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(pokemon)
-    // })
-    //   .then(res =>  res.json())
-    //   .then(pokemon => addPokemon(pokemon));
-    //   });
-
+    fetch('http://localhost:3000/pokemons', {
+   method: 'POST',
+   headers: {
+       'Content-Type': 'application/json'
+   },
+   body: JSON.stringify(pokemon)
+})
     pokeForm.reset();
   });
 }
 
 function init() {
+  pokeList.innerHTML = ''
   listenToAddPokemonForm();
-
-  // READ
-  // fetch("http://localhost:3000/pokemons")
-  //   .then(res => res.json());
-  //   .then(pokemons => addPokemons(pokemons));
+  fetch('http://localhost:3000/pokemons')
+ .then(function (response) {
+   return response.json()
+ })
+ .then(pokemons => addPokemons(pokemons))
 }
 
 init();
