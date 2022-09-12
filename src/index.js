@@ -1,53 +1,54 @@
-const pokeForm = document.querySelector(".poke-form")
-const pokeList = document.querySelector(".poke-list")
+const POKE_FORM = document.querySelector(".poke-form")
+const POKE_LIST = document.querySelector(".poke-list")
 let likedPokemons = []
 
 function createPokemonCard(pokemon) {
-  const liEl = document.createElement("li")
-  const imgEl = document.createElement("img")
-  const h2El = document.createElement("h2")
-  const deleteButton = document.createElement("button")
-  const likeButton = document.createElement("button")
-  const likeImage = document.createElement("img")
+  const LI_EL = document.createElement("li")
+  const IMG_EL = document.createElement("img")
+  const H2_EL = document.createElement("h2")
+  const DELETE_BUTTON = document.createElement("button")
+  const LIKE_BUTTON = document.createElement("button")
+  const LIKE_IMAGE = document.createElement("img")
 
-  liEl.classList.add("pokemon")
-  imgEl.src = pokemon.image
+  LI_EL.classList.add("pokemon")
+  IMG_EL.src = pokemon.image
 
-  h2El.innerText = pokemon.name
+  H2_EL.innerText = pokemon.name
 
-  deleteButton.innerText = 'Delete'
-  deleteButton.setAttribute('id', 'delete' + pokemon.id)
-  deleteButton.setAttribute('class', 'deleteButton')
+  DELETE_BUTTON.innerText = 'Delete'
+  DELETE_BUTTON.setAttribute('id', 'delete' + pokemon.id)
+  DELETE_BUTTON.setAttribute('class', 'deleteButton')
 
-  likeButton.innerText = 'Like'
-  likeButton.setAttribute('id', 'like' + pokemon.id)
-  likeButton.setAttribute('class', 'likeButton')
+  LIKE_BUTTON.innerText = 'Like'
+  LIKE_BUTTON.setAttribute('id', 'like' + pokemon.id)
+  LIKE_BUTTON.setAttribute('class', 'likeButton')
 
-  likeImage.setAttribute('src', 'assets/heart.svg')
-  likeImage.setAttribute('alt', pokemon.name)
-  likeImage.setAttribute('width', '10px')
-  likeImage.classList.add('notLiked')
+  LIKE_IMAGE.setAttribute('src', 'assets/heart.svg')
+  LIKE_IMAGE.setAttribute('alt', pokemon.name)
+  LIKE_IMAGE.setAttribute('width', '10px')
+  LIKE_IMAGE.classList.add('notLiked')
 
-  if (findLikedPokemons(pokemon.id)) {
-    likeImage.classList.remove('notLiked')
-    likeImage.classList.add('liked')
+  if (findLikedPokemon(pokemon.id)) {
+    LIKE_IMAGE.classList.remove('notLiked')
+    LIKE_IMAGE.classList.add('liked')
   }
 
-  liEl.append(likeImage, imgEl, h2El, likeButton, deleteButton)
-  pokeList.append(liEl)
+  LI_EL.append(LIKE_IMAGE, IMG_EL, H2_EL, LIKE_BUTTON, DELETE_BUTTON)
+  POKE_LIST.append(LI_EL)
 
-  deleteButton.addEventListener('click', function (e) {
+  DELETE_BUTTON.addEventListener('click', function (e) {
     deletePokemon(pokemon.id)
   });
-  likeButton.addEventListener('click', function (e) {
-    if (!findLikedPokemons(pokemon.id)) {
+
+  LIKE_BUTTON.addEventListener('click', function (e) {
+    if (!findLikedPokemon(pokemon.id)) {
       likePokemon(pokemon.id)
-      likeImage.classList.remove('notLiked')
-      likeImage.classList.add('liked')
+      LIKE_IMAGE.classList.remove('notLiked')
+      LIKE_IMAGE.classList.add('liked')
     } else {
       likedPokemons = removeLikedPokemon(pokemon.id)
-      likeImage.classList.remove('liked')
-      likeImage.classList.add('notLiked')
+      LIKE_IMAGE.classList.remove('liked')
+      LIKE_IMAGE.classList.add('notLiked')
     }
   });
 }
@@ -57,14 +58,14 @@ function addPokemons(pokemons) {
 }
 
 function listenToAddPokemonForm() {
-  pokeForm.addEventListener("submit", function (event) {
+  POKE_FORM.addEventListener("submit", function (event) {
     event.preventDefault();
     const pokemon = {
-      name: pokeForm.name.value,
-      image: pokeForm.image.value
+      name: POKE_FORM.name.value,
+      image: POKE_FORM.image.value
     }
     postNewPokemon(pokemon)
-    pokeForm.reset()
+    POKE_FORM.reset()
   })
 }
 
@@ -94,7 +95,7 @@ function deletePokemon(pokemonId) {
 }
 
 function likePokemon(pokemonId) {
-  if (!findLikedPokemons(pokemonId)) {
+  if (!findLikedPokemon(pokemonId)) {
     likedPokemons.push(pokemonId)
   }
 }
@@ -105,7 +106,7 @@ function removeLikedPokemon(pokemonId) {
   });
 }
 
-function findLikedPokemons(pokemonId) {
+function findLikedPokemon(pokemonId) {
   if (likedPokemons.find(element => element === pokemonId)) {
     return true
   }
