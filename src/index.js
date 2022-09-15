@@ -91,7 +91,7 @@ function postNewPokemon(newPokemon) {
 
 function deletePokemon(pokemonId) {
   likedPokemons = removeLikedPokemon(pokemonId)
-  const CARD_TO_REMOVE = document.querySelector('#card' + pokemonId).remove()
+  document.querySelector('#card' + pokemonId).remove()
   fetch("http://localhost:3000/pokemons/" + pokemonId, {
     method: "DELETE"
   })
