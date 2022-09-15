@@ -13,6 +13,8 @@ function createPokemonCard(pokemon) {
   LI_EL.classList.add("pokemon")
   IMG_EL.src = pokemon.image
 
+  LI_EL.setAttribute('id', 'card' + pokemon.id)
+
   H2_EL.innerText = pokemon.name
 
   DELETE_BUTTON.innerText = 'Delete'
@@ -89,6 +91,7 @@ function postNewPokemon(newPokemon) {
 
 function deletePokemon(pokemonId) {
   likedPokemons = removeLikedPokemon(pokemonId)
+  const CARD_TO_REMOVE = document.querySelector('#card' + pokemonId).remove()
   fetch("http://localhost:3000/pokemons/" + pokemonId, {
     method: "DELETE"
   })
@@ -114,6 +117,7 @@ function findLikedPokemon(pokemonId) {
 }
 
 function init() {
+  POKE_LIST.innerHTML = ''
   getAllPokemons()
   listenToAddPokemonForm();
 }
