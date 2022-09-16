@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: aliceblue;
 }
 
 .title {
@@ -8,6 +9,7 @@ body {
 
 .poke-form {
   font-family: monospace;
+  padding: 1rem;
 }
 
 .poke-form label {
@@ -15,7 +17,7 @@ body {
   margin-bottom: 10px;
 }
 
-.poke-form input[type="submit"] {
+.poke-form input[type="submit"], .deleteButton, .likeButton {
   padding: 10px 20px;
   background-color: #ffffff;
 
@@ -23,11 +25,24 @@ body {
   border-radius: 5px;
 
   font-family: monospace;
+  margin: 0.2rem;
+}
+
+.poke-form input[type="submit"]:hover, .likeButton:hover {
+  background-color: aliceblue;
+}
+
+.deleteButton {
+  background-color: lightcoral;
+}
+
+.deleteButton:hover {
+  background-color: lightpink;
 }
 
 .poke-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
+  grid-template-columns: repeat(auto-fit, 220px);
   grid-gap: 10px;
   justify-content: center;
   list-style-type: none;
@@ -40,6 +55,8 @@ body {
   padding: 20px;
 
   box-shadow: 2px 2px 5px 0 #00000030;
+
+  text-align: center;
 }
 
 .pokemon img {
@@ -50,3 +67,35 @@ body {
 .pokemon h2 {
   text-align: center;
 }
+
+.container {
+  padding: 2rem;
+  width: 44rem;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 1rem;
+}
+
+#editWarning {
+  color: red;
+}
+
+.editMode {
+  background-color: lightpink;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+img.liked, img.notLiked{
+  width: 20px;
+}
+
+.notLiked {
+  display: none;
+}
+
+.liked {
+  display: block;
+}
+

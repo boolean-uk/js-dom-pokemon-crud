@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PokeCRUD</title>
-    <meta charset="UTF-8" />
-    <script defer src="src/index.js"></script>
-    <link rel="stylesheet" href="src/styles.css" />
-  </head>
-  <body>
+
+<head>
+  <title>PokeCRUD</title>
+  <meta charset="UTF-8" />
+  <script defer src="src/index.js"></script>
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+
+<body>
+  <main class="container">
     <h1 class="title">PokeCRUD</h1>
     <form class="poke-form">
       <label>
         Name:
-        <input type="text" name="name" required />
+        <input type="text" name="name" required id="pokemonNameField"/>
       </label>
       <label>
         Image URL:
-        <input type="text" name="image" required />
+        <input type="text" name="image" required id="imageURLField"/>
       </label>
-      <input type="submit" value="Add Pokémon" />
-    </form>
+      <input type="submit" value="Add Pokémon" id="submitButton"/>
 
+    </form>
     <ul class="poke-list"></ul>
-  </body>
+  </main>
+
+</body>
+
 </html>
