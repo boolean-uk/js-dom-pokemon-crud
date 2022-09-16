@@ -6,31 +6,76 @@ function addPokemon(pokemon) {
   const imgEl = document.createElement("img");
   const h2El = document.createElement("h2");
   const deletebutton = document.createElement("button");
+
   deletebutton.setAttribute("id", pokemon.id);
-  deletebutton.innerText = "Delete";
+
+  const likebutton = document.createElement("button");
+  likebutton.innerText =
+    pokemon.like === true
+      ? "Do you like it? yes!"
+      : "Do you like it? No!";
 
   liEl.classList.add("pokemon");
   imgEl.src = pokemon.image;
 
   h2El.innerText = pokemon.name;
+  deletebutton.innerText = "Delete";
 
-  liEl.append(imgEl, h2El, deletebutton);
-  pokeList.append(liEl);
+  deletebutton.addEventListener("click", (event) => {
+    event.preventDefault();
+    fetch('http://localhost:3000/pokemons/' + pokemon.id, {
+  method: 'DELETE'
+})
 
-  deletebutton.addEventListener("click", function () {
-    deletepokemon(pokemon.id);
   });
-}
+  //deletepokemon(pokemon.id);
 
+  likebutton.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (pokemon.like === true) {
+      likebutton.innerText = "Do you like it? Yes!";
+
+      fetch("http://localhost:3000/pokemons/" + pokemon.id, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ like: false }),
+      })
+        .then((response) => response.json)
+        .then((pokemon) => {
+          pokeList.innerHTML = "";
+          readAsync(pokemon);
+        });
+    } else {
+      likebutton.innerText = "Do you like it? No!";
+
+      fetch("http://localhost:3000/pokemons/" + pokemon.id, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ like: false }),
+      })
+        .then((response) => response.json())
+        .then((pokemon) => {
+          pokeList.innerHTML = "";
+          readAsync(pokemon);
+        });
+    }
+  });
+  liEl.append(imgEl, h2El, deletebutton, likebutton);
+  pokeList.append(liEl);
+}
 function addPokemons(pokemons) {
   pokemons.forEach((pokemon) => addPokemon(pokemon));
 }
 
-function deletepokemon(pokemonid) {
-  fetch("http://localhost:3000/pokemons/" + pokemonid, {
-    method: "DELETE",
-  });
-}
+// function deletepokemon(pokemonid) {
+//   fetch("http://localhost:3000/pokemons/" + pokemonid, {
+//     method: "DELETE",
+//   });
+// }
 
 function listenToAddPokemonForm() {
   pokeForm.addEventListener("submit", function (event) {
@@ -38,6 +83,7 @@ function listenToAddPokemonForm() {
     const pokemon = {
       name: pokeForm.name.value,
       image: pokeForm.image.value,
+      like: true
     };
 
     // CREATE
