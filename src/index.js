@@ -1,55 +1,121 @@
-const pokeForm = document.querySelector(".poke-form");
-const pokeList = document.querySelector(".poke-list");
-
-function addPokemon(pokemon) {
-  const liEl = document.createElement("li");
-  const imgEl = document.createElement("img");
-  const h2El = document.createElement("h2");
-
-  liEl.classList.add("pokemon");
-  imgEl.src = pokemon.image;
-
-  h2El.innerText = pokemon.name;
-
-  liEl.append(imgEl, h2El);
-  pokeList.append(liEl);
+const state = {
+  pokemons: []
 }
 
-function addPokemons(pokemons) {
-  pokemons.forEach(pokemon => addPokemon(pokemon))
+
+// Selectors
+const pokeList = document.querySelector('.poke-list')
+const pokeForm = document.querySelector('.poke-form')
+
+
+// Add Event 
+pokeForm.addEventListener('submit', (e)  => {
+  e.preventDefault()
+  addNewPokemon()
+})
+
+
+// Logic
+const listAllPokemon = () => {
+  console.log(state.pokemons)
+  pokeList.innerHTML = ''
+  state.pokemons.forEach((pokemon) => {
+    const liEl = document.createElement("li")
+    const imgEl = document.createElement("img")
+    const h2El = document.createElement("h2")
+    const likeBtn = document.createElement("button")
+    const rmvBtn = document.createElement("button")
+  
+    liEl.classList.add("pokemon")
+    imgEl.src = pokemon.image
+  
+    h2El.innerText = pokemon.name
+
+    likeBtn.innerText = isLiked(pokemon.liked)
+    likeBtn.addEventListener("click", () => {
+      changeLikeState(pokemon)
+    })
+
+    rmvBtn.innerText = "Remove"
+    rmvBtn.addEventListener('click', () => {
+      removePokemon(pokemon)
+    })
+  
+    liEl.append(imgEl, h2El, likeBtn, rmvBtn)
+    pokeList.append(liEl)
+  })
 }
 
-function listenToAddPokemonForm() {
-  pokeForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const pokemon = {
-      name: pokeForm.name.value,
-      image: pokeForm.image.value
-    };
 
-    // CREATE
-    // fetch("http://localhost:3000/pokemons", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(pokemon)
-    // })
-    //   .then(res =>  res.json())
-    //   .then(pokemon => addPokemon(pokemon));
-    //   });
-
-    pokeForm.reset();
-  });
+const isLiked = (liked) => {
+  return liked ? "Unlike" : "Like"
 }
 
-function init() {
-  listenToAddPokemonForm();
+const changeLikeState = (pokemon) => {
+  const change = {
+    liked: !pokemon.liked
+  }
 
-  // READ
-  // fetch("http://localhost:3000/pokemons")
-  //   .then(res => res.json());
-  //   .then(pokemons => addPokemons(pokemons));
+  const requestOptions = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(change)
+  }
+  fetch(`http://localhost:3000/pokemons/${pokemon.id}`, requestOptions)
+    .then(res => {
+      console.log('Linke state changed')
+      getData()
+    })
 }
 
-init();
+const removePokemon = (pokemon) => {
+  const requestOptions = {method: "DELETE"}
+  fetch(`http://localhost:3000/pokemons/${pokemon.id}`, requestOptions)
+    .then(res => {
+      console.log('removed Pokemon')
+      getData()
+    })
+}
+
+
+const getData = () => {
+  fetch("http://localhost:3000/pokemons")
+    .then((res) => {return res.json()})
+    .then((data) => {
+      state.pokemons = data
+      state.pokemons.forEach((pokemon) => {
+        if(pokemon.liked === undefined) {
+          pokemon.liked = false
+        }
+      })
+      listAllPokemon()
+    })
+}
+
+
+const addNewPokemon = () => {
+  const newName = document.querySelector('input[name="name"]').value
+  const newImg = document.querySelector('input[name="image"]').value
+
+  const newPokemon = {
+    name: newName,
+    image: newImg,
+    liked: false
+  }
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newPokemon) 
+  }
+
+  fetch("http://localhost:3000/pokemons", requestOptions)
+    .then(getData())
+}
+
+
+getData()
