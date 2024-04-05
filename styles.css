@@ -103,10 +103,10 @@ h2 {
 #like-heart {
   height: 20px;
   padding: 2px;
-
 }
 
 .update-section {
+  font-family: monospace;
   display: grid;
   place-self: center;
   gap: 5px;
@@ -116,6 +116,10 @@ h2 {
   margin-top: 5px;
 }
 
+button {
+  font-family: monospace;
+  background-color: white;
+}
 .update-section h3 {
   margin: 0;
   place-self: center;
