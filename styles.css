@@ -118,3 +118,15 @@ h2 {
 
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
+
+.delete-button {
+  gap: 5rem;
+  margin: 1rem 1rem 0 1rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: large;
+  color: red;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+}
