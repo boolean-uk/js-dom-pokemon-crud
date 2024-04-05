@@ -12,6 +12,9 @@ const buildCard = (pokemon) => {
   } else {
     likeHeart.setAttribute('src', './assets/heart-empty.svg')
   }
+  likeHeart.addEventListener('click', () => {
+    likeDislike(pokemon)
+  })
   li.append(likeHeart)
 
 
@@ -138,3 +141,20 @@ const updatePokemon = async (pokemon) => {
 };
 
 renderCards();
+
+//Like or dislike a pokemon
+const likeDislike = async (pokemon) => {
+    newLike = !pokemon.liked
+    await fetch (`${url}${pokemon.id}`, {
+        method:"PUT",
+        body: JSON.stringify({
+            name: pokemon.name,
+            image: pokemon.image,
+            liked: newLike
+        }),
+        headers: {
+            "content-type": "application/json"
+        },
+    })
+    renderCards();
+}
