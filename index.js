@@ -5,6 +5,16 @@ const buildCard = (pokemon) => {
   const li = document.createElement("li");
   li.classList.add("card");
 
+  const likeHeart = document.createElement('img')
+  likeHeart.setAttribute('id', 'like-heart')
+  if (pokemon.liked) {
+    likeHeart.setAttribute('src', './assets/heart-full.svg')
+  } else {
+    likeHeart.setAttribute('src', './assets/heart-empty.svg')
+  }
+  li.append(likeHeart)
+
+
   const h2 = document.createElement("h2");
   h2.classList.add("card--title");
   h2.innerText = pokemon.name;
@@ -71,7 +81,7 @@ const renderCards = async () => {
   json.forEach(buildCard);
 };
 
-//Add event listener to button
+//Add event listener to button to main form
 const addForm = document.querySelector("#poke-form");
 addForm.addEventListener("submit", (event) => {
   event.preventDefault();
