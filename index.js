@@ -15,14 +15,29 @@ async function render() {
     pokemon.forEach((item) => {
         const pokemonCard = document.createElement("li")
 
+        const topContainer = document.createElement("div")
+        topContainer.className = "top-container"
+
         const pokemonName = document.createElement("h2")
         pokemonName.innerHTML = item.name
+
+        const delButton = document.createElement("button")
+        delButton.addEventListener("click", () => {
+            id = item.id
+
+            deletePokemon(id)
+        })
+        delButton.innerHTML = "&#10060"
 
         const pokemonImage = document.createElement("img")
         pokemonImage.src = item.image
         pokemonImage.width = 256
 
-        pokemonCard.append(pokemonName)
+        topContainer.append(delButton)
+        topContainer.append(pokemonName)
+        
+        
+        pokemonCard.append(topContainer)
         pokemonCard.append(pokemonImage)
 
         cardsList.append(pokemonCard)
@@ -50,6 +65,27 @@ async function addPokemon(name, imageUrl) {
 })
 
 }
+
+
+async function deletePokemon(id) {
+        const options = {
+            method: "DELETE",
+        }
+    
+        fetch(
+            `https://boolean-api-server.fly.dev/angustownsley/pokemon/${id}`,
+            options
+        )
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response)
+                render()
+            })
+            .catch((err) => {
+                console.error(err)
+                alert("Pokemon not deleted, please try again")
+            })
+    }
 
 form.addEventListener("submit", (e) => {
     e.preventDefault()
