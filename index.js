@@ -18,6 +18,7 @@ function renderAllPokemonCards(data) {
         const cardTitle = document.createElement('h2')
         const pokemonImage = document.createElement('img')
         const deleteButton = document.createElement('button')
+        const div = updatePokemonDiv(pokemon)
 
         li.classList.add('card')
         cardTitle.classList.add('card--title')
@@ -25,10 +26,13 @@ function renderAllPokemonCards(data) {
         pokemonImage.classList.add('card--img')
         pokemonImage.setAttribute('width', '256')
         pokemonImage.setAttribute('src', pokemon.image)
+        deleteButton.classList.add('delete-button')
         deleteButton.innerText = 'Delete'
+        
         
         li.append(cardTitle)
         li.append(pokemonImage)
+        li.append(div)
         li.append(deleteButton)
         cards.append(li)
 
@@ -78,5 +82,59 @@ async function deletePokemon(pokemon) {
 
     getAllPokemon()
 }
+
+function updatePokemonDiv(pokemon) {
+    const updateForm = document.createElement('form')
+    const nameLabel = document.createElement('label')
+    const newNameInput =  document.createElement('input')
+    const imageLabel = document.createElement('label')
+    const newImageInput =  document.createElement('input')
+    const updateButton = document.createElement('input')  
+
+    updateForm.classList.add('update-form')
+    nameLabel.innerText = 'Name: '
+    imageLabel.innerText = 'Image URL: '
+    newNameInput.classList.add('new-input')
+    newNameInput.setAttribute('required', true)
+    newImageInput.classList.add('new-input')
+    newImageInput.setAttribute('required', true)
+    updateButton.classList.add('update-button')
+    updateButton.setAttribute('type', 'submit')
+    updateButton.setAttribute('value', 'Update')
+
+    updateForm.append(nameLabel)
+    nameLabel.append(newNameInput)
+    updateForm.append(imageLabel)
+    imageLabel.append(newImageInput)
+    updateForm.append(updateButton)
+
+    updateForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        
+        updatePokemon(pokemon, newNameInput.value, newImageInput.value)
+    })
+
+    return updateForm
+}
+
+async function updatePokemon(pokemon, newNameInput, newImageInput) {
+    const updateUrl = `https://boolean-api-server.fly.dev/MyrtheDullaart/pokemon/${pokemon.id}`
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify({
+            name: newNameInput,
+            image: newImageInput,
+            liked: pokemon.liked
+        }),
+        headers: {
+            'Content-type': 'application/json',
+        }
+    }
+
+    await fetch(updateUrl,options)
+
+    getAllPokemon()
+}
+
 
 getAllPokemon()
