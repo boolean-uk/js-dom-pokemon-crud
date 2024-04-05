@@ -5,18 +5,17 @@ const buildCard = (pokemon) => {
   const li = document.createElement("li");
   li.classList.add("card");
 
-  const likeHeart = document.createElement('img')
-  likeHeart.setAttribute('id', 'like-heart')
+  const likeHeart = document.createElement("img");
+  likeHeart.setAttribute("id", "like-heart");
   if (pokemon.liked) {
-    likeHeart.setAttribute('src', './assets/heart-full.svg')
+    likeHeart.setAttribute("src", "./assets/heart-full.svg");
   } else {
-    likeHeart.setAttribute('src', './assets/heart-empty.svg')
+    likeHeart.setAttribute("src", "./assets/heart-empty.svg");
   }
-  likeHeart.addEventListener('click', () => {
-    likeDislike(pokemon)
-  })
-  li.append(likeHeart)
-
+  likeHeart.addEventListener("click", () => {
+    likeDislike(pokemon);
+  });
+  li.append(likeHeart);
 
   const h2 = document.createElement("h2");
   h2.classList.add("card--title");
@@ -144,17 +143,17 @@ renderCards();
 
 //Like or dislike a pokemon
 const likeDislike = async (pokemon) => {
-    newLike = !pokemon.liked
-    await fetch (`${url}${pokemon.id}`, {
-        method:"PUT",
-        body: JSON.stringify({
-            name: pokemon.name,
-            image: pokemon.image,
-            liked: newLike
-        }),
-        headers: {
-            "content-type": "application/json"
-        },
-    })
-    renderCards();
-}
+  const newLike = !pokemon.liked;
+  await fetch(`${url}${pokemon.id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      name: pokemon.name,
+      image: pokemon.image,
+      liked: newLike,
+    }),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  renderCards();
+};
