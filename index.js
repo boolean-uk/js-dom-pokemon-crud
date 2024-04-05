@@ -6,7 +6,7 @@ const cardsUl = document.querySelector('.cards')
 const urlApi = 'https://boolean-api-server.fly.dev/FBagdeli/pokemon'
 
 function render(){
-
+  
   fetch(urlApi)
     .then(res => res.json())
     .then(json => {
@@ -54,9 +54,29 @@ function showPokemon(pokemon){
   image.setAttribute('src', pokemon.image)
   image.setAttribute('width', 256)
   image.classList.add('card--img')
+
+  const deleteBtn = deletePokemon(pokemon)
   
-  cardLi.append(titleH2, image)
+  cardLi.append(titleH2, image, deleteBtn)
   cardsUl.append(cardLi)
+}
+
+function deletePokemon(pokemon){
+  const deleteBtn = document.createElement('button')
+  deleteBtn.innerText = 'Delete'
+  deleteBtn.addEventListener('click',() => {
+    console.log(pokemon.id)
+    fetch(`${urlApi}/${pokemon.id}`, {
+      method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(json => console.log(json))
+    fetch(urlApi)
+    .then(res => res.json())
+    .then(json => { console.log(json)})
+    render()
+  })
+  return deleteBtn
 }
 
 render()
