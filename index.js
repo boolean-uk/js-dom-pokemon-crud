@@ -3,6 +3,7 @@ const url = "https://boolean-api-server.fly.dev/MrStashy/pokemon"
 //Build card
 const buildCard = pokemon => {
     const li = document.createElement('li')
+    li.classList.add('card')
 
     const h2 = document.createElement('h2')
     h2.classList.add('card--title')
@@ -14,6 +15,12 @@ const buildCard = pokemon => {
     img.setAttribute('src', pokemon.image)
     img.classList.add('card--img')
     li.append(img)
+
+    const deleteButton = document.createElement('button')
+    deleteButton.setAttribute('id', 'delete-button')
+    deleteButton.classList.add('on-card-button')
+    deleteButton.innerText='Delete'
+    li.append(deleteButton)
 
     const cardList = document.querySelector('.cards')
     cardList.append(li)
@@ -38,7 +45,7 @@ addForm.addEventListener('submit', (event) => {
     addNewPokemon(nameInput, imgInput)
 })
 
-
+//Add pokemon
 const addNewPokemon = async (name, image) => {
     await fetch(url, {
         method: 'POST',
