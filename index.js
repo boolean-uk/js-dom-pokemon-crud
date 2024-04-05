@@ -17,17 +17,25 @@ function renderAllPokemonCards(data) {
         const li = document.createElement('li')
         const cardTitle = document.createElement('h2')
         const pokemonImage = document.createElement('img')
+        const deleteButton = document.createElement('button')
 
         li.classList.add('card')
+        cardTitle.classList.add('card--title')
         cardTitle.innerText = pokemon.name
         pokemonImage.classList.add('card--img')
         pokemonImage.setAttribute('width', '256')
         pokemonImage.setAttribute('src', pokemon.image)
+        deleteButton.innerText = 'Delete'
         
         li.append(cardTitle)
         li.append(pokemonImage)
+        li.append(deleteButton)
         cards.append(li)
-    });
+
+        deleteButton.addEventListener('click', () => {
+            deletePokemon(pokemon)
+        })
+    })
 }
 
 form.addEventListener('submit', (event) => {
@@ -53,6 +61,20 @@ async function createPokemonCard() {
 
     nameInput.value = ''
     imageInput.value = ''
+
+    getAllPokemon()
+}
+
+async function deletePokemon(pokemon) {
+    const deleteUrl = `https://boolean-api-server.fly.dev/MyrtheDullaart/pokemon/${pokemon.id}`
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+        },
+    }
+
+    await fetch(deleteUrl,options)
 
     getAllPokemon()
 }
