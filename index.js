@@ -20,24 +20,38 @@ const buildCard = pokemon => {
 }
 
 const renderCards = async () => {
+    const cardList = document.querySelector('.cards')
+
     const response = await fetch(url)
     const json = await response.json()
+
+    cardList.innerHTML = ''
     json.forEach(buildCard)
 }
 
 //Add event listener to button
 const addForm = document.querySelector('#poke-form')
 addForm.addEventListener('submit', (event) => {
+    event.preventDefault()
     const nameInput = document.querySelector('#name-input')
     const imgInput = document.querySelector('#image-input')
-    event.preventDefault()
-    console.log(nameInput.value)
+    addNewPokemon(nameInput, imgInput)
 })
 
 
-const addNewPokemon = async () => {
-    
- 
+const addNewPokemon = async (name, image) => {
+    await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+            name: name.value,
+            image: image.value,
+            liked: false
+        }),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+ renderCards()
 }
 
 
