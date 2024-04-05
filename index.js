@@ -6,15 +6,40 @@ const cardsUl = document.querySelector('.cards')
 const urlApi = 'https://boolean-api-server.fly.dev/FBagdeli/pokemon'
 
 function render(){
+
   fetch(urlApi)
     .then(res => res.json())
     .then(json => {
+      cardsUl.innerHTML = ''
       for(i in json){
         showPokemon(json[i])
       }
     })
-  // showPokemon()
+
 }
+
+function addPokemon(event){
+  event.preventDefault()
+  
+  fetch(urlApi, {
+    method: 'POST',
+    body: JSON.stringify({
+        "name": inputName.value,
+        "image": inputImage.value,
+        "liked": false
+    }),
+    headers:{
+      'content-type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(json => {
+    showPokemon(json)
+  })
+}
+
+
+form.addEventListener('submit', addPokemon)
 
 function showPokemon(pokemon){
 
