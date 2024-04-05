@@ -118,3 +118,100 @@ h2 {
 
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
+
+.delete-button, .update-button {
+  gap: 5rem;
+  margin: 1rem 1rem 0 1rem;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: x-large;
+  cursor: pointer;
+  background-color: white;
+}
+
+.card-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.delete-button {
+  color: red;
+  border: none;
+  outline: none;
+  justify-self: left;
+  cursor: pointer;
+  background-color: none;
+}
+
+.update-button {
+  display: flex;
+  color: rgb(238, 216, 17);
+  justify-content: center;
+  margin: 2rem;
+  padding: 1rem;
+  width: 80%;
+  border: 1px solid rgb(238, 216, 17);
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom right, rgb(96, 17, 205), rgb(251, 0, 255));
+  cursor: pointer;
+}
+
+
+.update-button:hover {
+  color: white;
+  border: 3px groove orange;
+  background-image: linear-gradient(to bottom right, rgb(251, 0, 255), rgb(96, 17, 205));
+}
+
+.like-button {
+  justify-self: right;
+  margin: 1.1rem 1rem 1rem 1rem;
+  cursor: pointer;
+}
+
+.like-button:hover {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.popup-section {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  left: 25%;
+  padding: 5rem;
+  border-radius: 20px;
+  background-color: white;
+  border: 3px groove rgb(96, 17, 205);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: lighter;
+  color: rgb(238, 216, 17);
+  place-content: center;
+
+}
+
+.update-pokemon {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border: 1px ridge white;
+  color: white;
+  outline: none;
+  background-image: linear-gradient(to bottom right, rgb(251, 0, 255), rgb(96, 17, 205));
+  border-radius: 20px;
+  padding: 0.5rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.update-pokemon:hover {
+  background-image: linear-gradient(to right top, rgb(251, 0, 255), rgb(96, 17, 205));
+}
+
+#update-form {
+  display: grid;
+  grid-auto-columns: auto;
+  grid-auto-flow: column;
+  gap: 1rem;
+}
+
+.delete-container, .name-container, .url-container, .submit-container {
+  width: fit-content;
+}
