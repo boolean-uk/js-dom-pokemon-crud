@@ -1,11 +1,4 @@
-/* <li class="card">
-    <h2 class="card--title">Bulbasaur</h2>
-    <img
-        width="256"
-        class="card--img"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-    />
-</li> */
+const url = "https://boolean-api-server.fly.dev/MrStashy/pokemon"
 
 //Build card
 const buildCard = pokemon => {
@@ -27,10 +20,26 @@ const buildCard = pokemon => {
 }
 
 const renderCards = async () => {
-    const url = await fetch("https://boolean-api-server.fly.dev/MrStashy/pokemon")
-    const json = await url.json()
-    
+    const response = await fetch(url)
+    const json = await response.json()
     json.forEach(buildCard)
 }
+
+//Add event listener to button
+const addForm = document.querySelector('#poke-form')
+addForm.addEventListener('submit', (event) => {
+    const nameInput = document.querySelector('#name-input')
+    const imgInput = document.querySelector('#image-input')
+    event.preventDefault()
+    console.log(nameInput.value)
+})
+
+
+const addNewPokemon = async () => {
+    
+ 
+}
+
+
 
 renderCards()
