@@ -31,13 +31,21 @@ function createCard(name, image, liked) {
     deleteBtn.addEventListener('click', () => {
         removerCard(listItem)})
 
-
+    
+    
     const likedBtn = document.createElement('img')
     likedBtn.width = '30'
     likedBtn.classList.add('like-button')
     likedBtn.setAttribute('src', 'assets/svg/like.svg')
     cardHeader.append(likedBtn)
     
+    if (liked === true) {
+        likedBtn.setAttribute('src', 'assets/svg/liked.svg')
+    }
+
+    likedBtn.addEventListener('click', () => {
+        updateLikedStatus()
+    })
 
     const pokemonName = document.createElement('h2')
     pokemonName.classList.add('card--title')
@@ -115,11 +123,14 @@ function removerCard(listItem) {
 
 
 function popUpMessage() {
+    const formSection = document.createElement('section')
+    formSection.classList.add('popup-section')
+    
     const form = document.createElement('form')
     form.setAttribute('id', 'update-form')
 
     const nameLabel = document.createElement('label')
-    nameLabel.innerText = 'Name:'
+    nameLabel.innerText = 'Name: '
 
     const nameInput = document.createElement('input')
     nameInput.setAttribute('id', 'updated-name-input')
@@ -130,7 +141,7 @@ function popUpMessage() {
     form.append(nameLabel)
 
     const urlLabel = document.createElement('label')
-    urlLabel.innerText = 'Image URL:'
+    urlLabel.innerText = 'Image URL: '
 
     const urlInput = document.createElement('input')
     urlInput.setAttribute('id', 'updated-image-input')
@@ -143,9 +154,30 @@ function popUpMessage() {
     const submitInput = document.createElement('input')
     submitInput.type = 'submit'
     submitInput.value = 'EVOLVE POKEMON'
+    submitInput.classList.add('update-pokemon')
     form.append(submitInput)
 
-    submitInput.addEventListener('submit', updateCard())
+    submitInput.addEventListener('submit', () => {updateCard()})
+    
+    formSection.append(form)
+    mainPage.append(formSection)
+}
 
-    mainPage.append(form)
+function updateLikedStatus() {
+    fetch(url, {
+        method: 'PUT', 
+        body: JSON.stringify({
+            name: nameInput.value,
+            image: urlInput.value,
+            liked: true
+        }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+        .then((response) => response.json())
+        .then(json => {
+        getCards()
+        cardList.innerHTML = ''
+        })
+    })
 }

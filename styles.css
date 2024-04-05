@@ -138,6 +138,7 @@ h2 {
   border: none;
   outline: none;
   justify-self: left;
+  cursor: pointer;
 }
 
 .update-button {
@@ -150,11 +151,53 @@ h2 {
   border: 1px solid rgb(238, 216, 17);
   border-radius: 10px;
   background-image: linear-gradient(to bottom right, rgb(96, 17, 205), rgb(251, 0, 255));
+  cursor: pointer;
+}
+
+
+.update-button:hover {
+  color: white;
+  border: 3px groove orange;
+  background-image: linear-gradient(to bottom right, rgb(251, 0, 255), rgb(96, 17, 205));
 }
 
 .like-button {
-  display: flex;
   justify-self: right;
   margin: 1.1rem 1rem 1rem 1rem;
+  cursor: pointer;
+}
+
+.like-button:hover {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.popup-section {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  left: 25%;
+  padding: 5rem;
+  border-radius: 20px;
+  background-image: linear-gradient(to bottom right, rgb(251, 0, 255), rgb(96, 17, 205));
+  gap: 50px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: lighter;
+  color: rgb(238, 216, 17);
+}
+
+.update-pokemon {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border: 1px ridge white;
+  color: white;
+  outline: none;
+  background: none;
+  border-radius: 20px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.update-pokemon:hover {
+  background-image: linear-gradient(to right top, rgb(251, 0, 255), rgb(96, 17, 205));
 }
 
