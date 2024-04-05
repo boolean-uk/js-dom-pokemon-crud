@@ -1,4 +1,4 @@
-const url = "https://boolean-api-server.fly.dev/MrStashy/pokemon"
+const url = "https://boolean-api-server.fly.dev/MrStashy/pokemon/"
 
 //Build card
 const buildCard = pokemon => {
@@ -20,6 +20,9 @@ const buildCard = pokemon => {
     deleteButton.setAttribute('id', 'delete-button')
     deleteButton.classList.add('on-card-button')
     deleteButton.innerText='Delete'
+    deleteButton.addEventListener('click', () => {
+        deletePokemon(pokemon)
+    })
     li.append(deleteButton)
 
     const cardList = document.querySelector('.cards')
@@ -61,6 +64,12 @@ const addNewPokemon = async (name, image) => {
  renderCards()
 }
 
-
+//Delete pokemon
+const deletePokemon = async (pokemon) => {
+   await fetch(`${url}${pokemon.id}`, {
+    method: 'DELETE'
+   })
+   renderCards()
+}
 
 renderCards()
