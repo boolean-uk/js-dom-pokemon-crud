@@ -119,11 +119,16 @@ h2 {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
-.delete-button, .update-button {
+.delete-button, .update-button, .like-button {
   margin: 10px;
 }
 
 .update-form label {
   display: block;
+  margin: 10px;
+}
+
+.liked-image {
+  width: 20px;
   margin: 10px;
 }

@@ -19,6 +19,7 @@ function renderAllPokemonCards(data) {
         const pokemonImage = document.createElement('img')
         const deleteButton = document.createElement('button')
         const div = updatePokemonDiv(pokemon)
+        const likeButton = document.createElement('button')
 
         li.classList.add('card')
         cardTitle.classList.add('card--title')
@@ -26,18 +27,41 @@ function renderAllPokemonCards(data) {
         pokemonImage.classList.add('card--img')
         pokemonImage.setAttribute('width', '256')
         pokemonImage.setAttribute('src', pokemon.image)
+        likeButton.innerText = 'Like'
+        likeButton.classList.add('like-button')
         deleteButton.classList.add('delete-button')
         deleteButton.innerText = 'Delete'
         
+        if (!pokemon.liked) {
+            const notLiked = document.createElement('img')
+
+            notLiked.setAttribute('src', './assets/icons/emptyheart.svg')
+            notLiked.classList.add('liked-image')
+
+            li.append(notLiked)
+        } else if (pokemon.liked) {
+            const liked = document.createElement('img')
+
+            liked.setAttribute('src', './assets/icons/filledheart.svg')
+            liked.classList.add('liked-image')
+
+            li.append(liked)
+        }
+
         
         li.append(cardTitle)
         li.append(pokemonImage)
         li.append(div)
+        li.append(likeButton)
         li.append(deleteButton)
         cards.append(li)
 
         deleteButton.addEventListener('click', () => {
             deletePokemon(pokemon)
+        })
+
+        likeButton.addEventListener('click', () => {
+            likePokemon(pokemon)
         })
     })
 }
@@ -110,7 +134,7 @@ function updatePokemonDiv(pokemon) {
 
     updateForm.addEventListener('submit', (event) => {
         event.preventDefault()
-        
+
         updatePokemon(pokemon, newNameInput.value, newImageInput.value)
     })
 
@@ -132,6 +156,24 @@ async function updatePokemon(pokemon, newNameInput, newImageInput) {
     }
 
     await fetch(updateUrl,options)
+
+    getAllPokemon()
+}
+
+async function likePokemon(pokemon) {
+    const likeUrl = `https://boolean-api-server.fly.dev/MyrtheDullaart/pokemon/${pokemon.id}`
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify({
+            name: pokemon.name,
+            image: pokemon.image,
+            liked: !pokemon.liked
+        }),
+        headers: {
+            'Content-type': 'application/json',
+        }
+    }
+    await fetch(likeUrl,options)
 
     getAllPokemon()
 }
