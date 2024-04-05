@@ -1,5 +1,8 @@
 const url = 'https://boolean-api-server.fly.dev/MyrtheDullaart/pokemon'
 const cards = document.querySelector('.cards')
+const form = document.querySelector('#poke-form')
+const nameInput = document.querySelector('#name-input')
+const imageInput = document.querySelector('#image-input')
 
 async function getAllPokemon() {
     const response = await fetch(url)
@@ -25,6 +28,33 @@ function renderAllPokemonCards(data) {
         li.append(pokemonImage)
         cards.append(li)
     });
+}
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    createPokemonCard()
+})
+
+async function createPokemonCard() {
+    const options = {
+        method: 'POST',
+        body: JSON.stringify({
+            name: nameInput.value,
+            image: imageInput.value,
+            liked: false
+        }),
+        headers: {
+            'Content-type': 'application/json',
+        },
+    }
+
+    await fetch(url, options)
+
+    nameInput.value = ''
+    imageInput.value = ''
+
+    getAllPokemon()
 }
 
 getAllPokemon()
