@@ -15,7 +15,15 @@ body {
 .top-container > button {
   border-radius: 100%;
   height: 100%;
+  background-color: white;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
+
+
+
+
 
 #poke-form {
   font-family: monospace;
