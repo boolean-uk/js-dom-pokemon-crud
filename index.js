@@ -22,6 +22,7 @@ function createCard(name, image, liked) {
     const cardHeader = document.createElement('section')
     cardHeader.classList.add('card-header')
     listItem.append(cardHeader)
+
     const deleteBtn = document.createElement('input')
     deleteBtn.classList.add('delete-button')
     deleteBtn.type = 'button'
@@ -43,8 +44,8 @@ function createCard(name, image, liked) {
         likedBtn.setAttribute('src', 'assets/svg/liked.svg')
     }
 
-    likedBtn.addEventListener('click', () => {
-        updateLikedStatus()
+    likedBtn.addEventListener('click', (name, image) => {
+        updateLikedStatus(name, image)
     })
 
     const pokemonName = document.createElement('h2')
@@ -95,7 +96,8 @@ pokemonForm.addEventListener('submit', (element) => {
 })
 
 
-function updateCard() {
+function updateCard(event) {
+    event.preventDefault()
     fetch(url, {
         method: 'PUT', 
         body: JSON.stringify({
@@ -125,21 +127,40 @@ function removerCard(listItem) {
 function popUpMessage() {
     const formSection = document.createElement('section')
     formSection.classList.add('popup-section')
-    
+
     const form = document.createElement('form')
     form.setAttribute('id', 'update-form')
 
+    
+    const deleteContainer = document.createElement('div')
+    deleteContainer.classList.add('delete-container')
+    const deleteBtn = document.createElement('input')
+    deleteBtn.classList.add('delete-button')
+    deleteBtn.type = 'button'
+    deleteBtn.value = 'X'
+    deleteContainer.append(deleteBtn)
+    form.append(deleteContainer)
+
+    deleteBtn.addEventListener('click', () => {
+        cardList.innerHTML = ''
+        getCards()
+    })
+
+    const nameContainer = document.createElement('div')
+    nameContainer.classList.add('name-container')
     const nameLabel = document.createElement('label')
     nameLabel.innerText = 'Name: '
-
     const nameInput = document.createElement('input')
     nameInput.setAttribute('id', 'updated-name-input')
     nameInput.type = 'text'
     nameInput.name = 'name'
     nameInput.required
     nameLabel.append(nameInput)
-    form.append(nameLabel)
+    nameContainer.append(nameLabel)
+    form.append(nameContainer)
 
+    const urlContainer = document.createElement('div')
+    urlContainer.classList.add('url-container')
     const urlLabel = document.createElement('label')
     urlLabel.innerText = 'Image URL: '
 
@@ -149,26 +170,31 @@ function popUpMessage() {
     urlInput.name = 'image'
     urlInput.required
     urlLabel.append(urlInput)
-    form.append(urlLabel)
+    urlContainer.append(urlLabel)
+    form.append(urlContainer)
 
+    const submitContainer = document.createElement('div')
+    submitContainer.classList.add('submit-container')
     const submitInput = document.createElement('input')
     submitInput.type = 'submit'
     submitInput.value = 'EVOLVE POKEMON'
     submitInput.classList.add('update-pokemon')
-    form.append(submitInput)
+    submitContainer.append(submitInput)
+    form.append(submitContainer)
 
-    submitInput.addEventListener('submit', () => {updateCard()})
+    submitInput.addEventListener('submit', () => {
+        updateCard()})
     
     formSection.append(form)
-    mainPage.append(formSection)
+    cardList.append(formSection)
 }
 
-function updateLikedStatus() {
+function updateLikedStatus(name, image) {
     fetch(url, {
         method: 'PUT', 
         body: JSON.stringify({
-            name: nameInput.value,
-            image: urlInput.value,
+            name: name,
+            image: image,
             liked: true
         }),
         headers: {
