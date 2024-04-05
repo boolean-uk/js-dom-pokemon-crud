@@ -39,7 +39,9 @@ function renderAllPokemonCards(data) {
             notLiked.classList.add('liked-image')
 
             li.append(notLiked)
-        } else if (pokemon.liked) {
+        } 
+        
+        if (pokemon.liked) {
             const liked = document.createElement('img')
 
             liked.setAttribute('src', './assets/icons/filledheart.svg')
@@ -47,7 +49,6 @@ function renderAllPokemonCards(data) {
 
             li.append(liked)
         }
-
         
         li.append(cardTitle)
         li.append(pokemonImage)
