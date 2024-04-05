@@ -119,14 +119,42 @@ h2 {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
-.delete-button {
+.delete-button, .update-button {
   gap: 5rem;
   margin: 1rem 1rem 0 1rem;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: large;
-  color: red;
-  border: none;
-  outline: none;
+  font-size: x-large;
   cursor: pointer;
   background-color: white;
 }
+
+.card-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.delete-button {
+  color: red;
+  border: none;
+  outline: none;
+  justify-self: left;
+}
+
+.update-button {
+  display: flex;
+  color: rgb(238, 216, 17);
+  justify-content: center;
+  margin: 2rem;
+  padding: 1rem;
+  width: 80%;
+  border: 1px solid rgb(238, 216, 17);
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom right, rgb(96, 17, 205), rgb(251, 0, 255));
+}
+
+.like-button {
+  display: flex;
+  justify-self: right;
+  margin: 1.1rem 1rem 1rem 1rem;
+}
+
