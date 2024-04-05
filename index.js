@@ -16,38 +16,37 @@ const buildCard = (pokemon) => {
   img.classList.add("card--img");
   li.append(img);
 
-  const updateDiv = document.createElement('div')
-  updateDiv.classList.add('update-section')
-  li.append(updateDiv)
+  const updateDiv = document.createElement("div");
+  updateDiv.classList.add("update-section");
+  li.append(updateDiv);
 
-  const h3 = document.createElement('h3')
-  h3.innerText = "Update Pokemon"
-  updateDiv.append(h3)
+  const h3 = document.createElement("h3");
+  h3.innerText = "Update Pokemon";
+  updateDiv.append(h3);
 
   const newNameLabel = document.createElement("label");
-  newNameLabel.innerText = "Name: "
-  const newNameInput = document.createElement("input")
-  newNameInput.setAttribute('id', 'new-name-input')
-  newNameInput.setAttribute('type', 'text')
-  newNameLabel.append(newNameInput)
-  updateDiv.append(newNameLabel)
+  newNameLabel.innerText = "Name: ";
+  const newNameInput = document.createElement("input");
+  newNameInput.setAttribute("id", "new-name-input");
+  newNameInput.setAttribute("type", "text");
+  newNameLabel.append(newNameInput);
+  updateDiv.append(newNameLabel);
 
   const newImageLabel = document.createElement("label");
-  newImageLabel.innerText = "Image: "
-  const newImageInput = document.createElement("input")
-  newImageInput.setAttribute('id', 'new-image-input')
-  newImageInput.setAttribute('type', 'text')
-  newImageLabel.append(newImageInput)
-  updateDiv.append(newImageLabel)
+  newImageLabel.innerText = "Image: ";
+  const newImageInput = document.createElement("input");
+  newImageInput.setAttribute("id", "new-image-input");
+  newImageInput.setAttribute("type", "text");
+  newImageLabel.append(newImageInput);
+  updateDiv.append(newImageLabel);
 
-  const updateButton = document.createElement('button')
-  updateButton.setAttribute('id', 'update-button')
-  updateButton.innerText = "Update"
-  updateButton.addEventListener('click', () => {
-    updatePokemon(pokemon)
-  })
-  updateDiv.append(updateButton)
-
+  const updateButton = document.createElement("button");
+  updateButton.setAttribute("id", "update-button");
+  updateButton.innerText = "Update";
+  updateButton.addEventListener("click", () => {
+    updatePokemon(pokemon);
+  });
+  updateDiv.append(updateButton);
 
   const deleteButton = document.createElement("button");
   deleteButton.setAttribute("id", "delete-button");
@@ -104,6 +103,27 @@ const deletePokemon = async (pokemon) => {
   await fetch(`${url}${pokemon.id}`, {
     method: "DELETE",
   });
+  renderCards();
+};
+
+//Update pokemon
+const updatePokemon = async (pokemon) => {
+  const newName = document.querySelector("#new-name-input");
+  const newImage = document.querySelector("#new-image-input");
+
+  await fetch(`${url}${pokemon.id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      name: newName.value,
+      image: newImage.value,
+      liked: false,
+    }),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  newName.value = "";
+  newImage.value = "";
   renderCards();
 };
 
