@@ -18,10 +18,19 @@ function getCards() {
 function createCard(name, image, liked) {
     const listItem = document.createElement('li')
     listItem.classList.add('card')
+
+    const cardBackground = document.createElement('div')
+    cardBackground.classList.add('card-background')
+    listItem.append(cardBackground)
+
+    const cardContainer = document.createElement('div')
+    cardContainer.classList.add('card-container')
+    cardBackground.append(cardContainer)
+    
     
     const cardHeader = document.createElement('section')
     cardHeader.classList.add('card-header')
-    listItem.append(cardHeader)
+    cardContainer.append(cardHeader)
 
     const deleteBtn = document.createElement('input')
     deleteBtn.classList.add('delete-button')
@@ -51,19 +60,19 @@ function createCard(name, image, liked) {
     const pokemonName = document.createElement('h2')
     pokemonName.classList.add('card--title')
     pokemonName.innerText = name
-    listItem.append(pokemonName)
+    cardContainer.append(pokemonName)
 
     const pokemonImage = document.createElement('img')
     pokemonImage.width = '256'
     pokemonImage.classList.add('card--img')
     pokemonImage.setAttribute('src', image)
-    listItem.append(pokemonImage)
+    cardContainer.append(pokemonImage)
 
     const updateBtn = document.createElement('input')
     updateBtn.classList.add('update-button')
     updateBtn.type = 'button'
     updateBtn.value = 'Evolve'
-    listItem.append(updateBtn)
+    cardContainer.append(updateBtn)
     
     updateBtn.addEventListener('click', () => {
         popUpMessage()
@@ -116,8 +125,25 @@ function updateCard(event) {
     })
 }
 
+function updateLikedStatus(name, image) {
+    fetch(url, {
+        method: 'PUT', 
+        body: JSON.stringify({
+            name: name,
+            image: image,
+            liked: true
+        }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+        .then((response) => response.json())
+        .then(json => {
+        getCards()
+        cardList.innerHTML = ''
+        })
+    })
+}
 
-getCards()
 
 function removerCard(listItem) {
     listItem.remove()
@@ -142,8 +168,8 @@ function popUpMessage() {
     form.append(deleteContainer)
 
     deleteBtn.addEventListener('click', () => {
-        cardList.innerHTML = ''
         getCards()
+        cardList.innerHTML = ''
     })
 
     const nameContainer = document.createElement('div')
@@ -189,21 +215,4 @@ function popUpMessage() {
     cardList.append(formSection)
 }
 
-function updateLikedStatus(name, image) {
-    fetch(url, {
-        method: 'PUT', 
-        body: JSON.stringify({
-            name: name,
-            image: image,
-            liked: true
-        }),
-        headers: {
-            'Content-type': 'application/json'
-        }
-        .then((response) => response.json())
-        .then(json => {
-        getCards()
-        cardList.innerHTML = ''
-        })
-    })
-}
+getCards()
