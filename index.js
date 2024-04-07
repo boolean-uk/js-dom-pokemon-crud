@@ -11,6 +11,8 @@ async function getPokemonData () {
 function renderPokemon() {
     const pokemonListDOM = document.querySelector(".cards")
 
+pokemonListDOM.innerHTML = ""
+
     pokemonData.forEach((item) => {
         console.log("item is ", item)
         pokemonListDOM.innerHTML += `
