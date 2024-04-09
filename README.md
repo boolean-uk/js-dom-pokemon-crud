@@ -10,7 +10,7 @@
 
 ### Standard Criteria
 
-Use [this Pokémon REST API](https://boolean-api-server.fly.dev/api-docs/#/pokemon) for all data.
+Use [this Pokémon REST API](https://boolean-uk-api-server.fly.dev/api-docs/#/pokemon) for all data. The URL is structured like this: `https://boolean-api-server.fly.dev/YOUR_GITHUB_USERNAME/pokemon` (replace YOUR_GITHUB_USERNAME with your github username)
 
 - Show all existing pokemon when the page loads.
 - Enable creating new pokemon when submitting the form. The list of pokemon should update on the screen without reloading the page.
