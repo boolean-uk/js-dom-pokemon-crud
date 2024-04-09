@@ -17,11 +17,25 @@
         Image URL:
         <input id="image-input" type="text" name="image" required />
       </label>
+      <label>Liked:
+        <input id="liked-input" type="checkbox" name="liked" />
+      </label>
       <input type="submit" value="Add Pokémon" />
     </form>
 
     <ul class="cards">
       <!-- See templates/card.html -->
     </ul>
+
+    <template>
+      <li class="card">
+        <h2 class="card--title">Pokemon Title</h2>
+        <img
+            width="256"
+            class="card--img"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+        />
+      </li>
+    </template>
   </body>
 </html>
