@@ -118,3 +118,15 @@ h2 {
 
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
+
+.cross{
+  color: #ff0000;
+}
+
+.liked{
+  color: #00ff00;
+}
+
+.edit{
+  color: #0000ff;
+}
