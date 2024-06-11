@@ -29,6 +29,19 @@ async function makePoke(input) {
     renderPage()
   }
 
+async function deletePoke(id) {
+      try {
+        const response = await fetch(`https://boolean-uk-api-server.fly.dev/JDC-horizons/pokemon/${id}`, {
+          method: 'DELETE',
+        })
+        const data = await response.json();
+       
+      }  catch (error) {
+        console.error(error);
+      }
+      renderPage()
+  }
+
 async function renderPage() {
     let pokemon = await getPokes()
     const cardSection = document.querySelector('.cards')
@@ -47,6 +60,15 @@ async function renderPage() {
         pokeImg.setAttribute('width', '256')
         pokeImg.setAttribute('src', pokemon[i].image)
         pokeCard.appendChild(pokeImg)
+
+        const deleteButton = document.createElement('button')
+        deleteButton.textContent = 'Delete'
+        pokeCard.appendChild(deleteButton)
+
+        deleteButton.addEventListener('click', (event) => {
+            const id = pokemon[i].id
+            deletePoke(id)
+        })
 
         cardSection.appendChild(pokeCard)
     }
