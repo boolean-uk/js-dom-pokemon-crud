@@ -158,9 +158,9 @@ function generateEditCard(pokemon) {
     const breek2 = document.createElement('br')
     listItem.appendChild(breek2)
 
-    const deleteButton = document.createElement('button')
-    deleteButton.innerText = 'Submit'
-    deleteButton.addEventListener('click', () => {
+    const submitButton = document.createElement('button')
+    submitButton.innerText = 'Submit'
+    submitButton.addEventListener('click', () => {
         const updatedPokemon = {
             id: pokemon.id,
             name: pokemonName.value,
@@ -170,7 +170,7 @@ function generateEditCard(pokemon) {
         state.isEditing = false
         updatePokemon(updatedPokemon).then(() => getPokemon())
     })
-    listItem.appendChild(deleteButton)
+    listItem.appendChild(submitButton)
 
     return listItem
 }
