@@ -1,21 +1,88 @@
 body {
+  display: grid;
+  height: 100vh;
+  grid-template: 
+    'h1 h1 h1'
+    'poke-form update-form delete-form'
+    'cards cards cards';
+  align-items: center;
   font-family: sans-serif;
 }
 
+.pokemon-item {
+  display: grid;
+  grid-template-rows: 36px 24px 256px 1fr;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.pokemon-item img {
+  height: 100%;
+}
+
+.like {
+  visibility: hidden;
+}
+
+.like::after {
+  display: grid;
+  transition: 0.25s ease-in;
+  visibility: visible;
+  content: url(heart-not-filled.svg);
+  padding: 10px;
+  background-color: #ffffff;
+  border: solid 1px #00000030;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+.like:hover::after {
+  transition: 0.25s ease-out;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.liked::after {
+  display: grid;
+  transition: 0.25s ease-in;
+  visibility: visible;
+  content: url(heart-filled.svg);
+  padding: 10px;
+  background-color: #ffffff;
+  border: solid 1px #00000030;
+  border-radius: 5px;
+  font-family: monospace;
+}
+
+.liked:hover::after {
+  transition: 0.25s ease-out;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
 .title {
+  grid-area: h1;
   text-align: center;
 }
 
 #poke-form {
+  grid-area: poke-form;
+  justify-self: center;
   font-family: monospace;
 }
 
-#poke-form label {
+#poke-form label,
+.update-form label,
+.delete-form {
   display: block;
   margin-bottom: 10px;
 }
 
-#poke-form input[type="submit"] {
+#poke-form input[type="submit"],
+.update-form input[type="submit"],
+.delete-form input[type="submit"] {
   padding: 10px 20px;
   background-color: #ffffff;
 
@@ -38,7 +105,6 @@ body {
   border: solid 1px #00000010;
   border-radius: 5px;
   padding: 20px;
-
   box-shadow: 2px 2px 5px 0 #00000030;
 }
 
@@ -60,15 +126,6 @@ body {
   margin: 0;
 }
 
-body {
-  display: grid;
-  grid-template-columns: minmax(300px, 1200px);
-  justify-content: center;
-
-  height: 100vh;
-  font-family: sans-serif;
-}
-
 img {
   max-width: 100%;
 }
@@ -81,6 +138,7 @@ h2 {
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 375px);
+  grid-area: cards;
   gap: 15px;
   justify-content: center;
   justify-items: center;
@@ -117,4 +175,18 @@ h2 {
   margin: 0 auto;
 
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.update-form {
+  grid-area: update-form;
+  justify-self: center;
+  font-family: monospace;
+}
+
+.delete-form {
+  display: grid;
+  gap: 0.5rem;
+  grid-area: delete-form;
+  justify-self: center;
+  font-family: monospace;
 }
