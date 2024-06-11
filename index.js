@@ -29,6 +29,22 @@ async function makePoke(input) {
     renderPage()
   }
 
+async function updatePoke(id, pokemon) {
+    try {
+        const response = await fetch(`https://boolean-uk-api-server.fly.dev/JDC-horizons/pokemon/${id}`, {
+          method: 'PATCH',
+          body: JSON.stringify(pokemon)
+        })
+      
+        const data = await response.json();
+        
+      }  catch (error) {
+        console.error(error);
+      }
+
+      renderPage()
+    }
+
 async function deletePoke(id) {
       try {
         const response = await fetch(`https://boolean-uk-api-server.fly.dev/JDC-horizons/pokemon/${id}`, {
@@ -60,6 +76,27 @@ async function renderPage() {
         pokeImg.setAttribute('width', '256')
         pokeImg.setAttribute('src', pokemon[i].image)
         pokeCard.appendChild(pokeImg)
+
+        const updateButton = document.createElement('button')
+        updateButton.textContent = 'Update'
+        pokeCard.appendChild(updateButton)
+
+        updateButton.addEventListener('click', (event) => {
+            const updatedData = {}
+            const newName = prompt('Enter name: ')
+            if (newName !== null) {
+                updatedData.name = newName
+                const newImg = prompt('Paste new image url: ')
+                if (newImg !== null) {
+                    updatedData.image = newImg
+                } else {alert('Update cancelled.')}
+            } else alert('Update cancelled.')
+            updatedData.liked = pokemon[i].liked
+            idNum = pokemon[i].id
+            console.log(updatedData, idNum)
+
+            updatePoke(idNum, updatedData)
+        })
 
         const deleteButton = document.createElement('button')
         deleteButton.textContent = 'Delete'
